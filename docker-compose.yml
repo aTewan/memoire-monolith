@@ -1,13 +1,27 @@
 version: '3.7'
 services:
-
+  # Application backend
+  server-memoire-monolith:
+    build: 
+      context: server
+      dockerfile: Dockerfile
+    ports: 
+      - "8080:8080"
+    restart: always
+    depends_on: 
+      - db-memoire-monolith
+    environment: 
+      SPRING_DATASOURCE_URL: jdbc:mysql://db-memoire-monolith:3306/memoire-monolith?allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: antoinep
+      SPRING_DATASOURCE_PASSWORD: antoinep
+    networks: 
+      - backend
   
-
   # Base de données
-  db:
+  db-memoire-monolith:
     image: mysql
     ports: 
-      - "33006:33006"
+      - "3306:3306"
     restart: always
     environment: 
       MYSQL_DATABASE: memoire-monolith
