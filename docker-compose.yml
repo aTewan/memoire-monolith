@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+
+  
+
+  # Base de données
+  db:
+    image: mysql
+    ports: 
+      - "33006:33006"
+    restart: always
+    environment: 
+      MYSQL_DATABASE: memoire-monolith
+      MYSQL_USER: antoinep
+      MYSQL_PASSWORD: antoinep
+      MYSQL_ROOT_PASSWORD: root
+    volumes: 
+      - db-data:/var/lib/mysql
+    networks: 
+      - backend
+    
+volumes:
+  db-data:
+
+networks: 
+  backend:
